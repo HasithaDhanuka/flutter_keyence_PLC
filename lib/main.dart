@@ -1,5 +1,6 @@
 import 'package:conv2/provider/function.dart';
 import 'package:conv2/screen/popup_daialog.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_libserialport/flutter_libserialport.dart';
@@ -188,9 +189,11 @@ class _SerialPageState extends State<SerialPage> {
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.black,
+                    color: const Color.fromARGB(98, 0, 0, 0),
                   ),
                   child: SingleChildScrollView(
+                    dragStartBehavior: DragStartBehavior.down,
+
                     /*#################       OUTPUT   M O N I T O R    ##############################
           ################################################################################*/
                     child: Text(
@@ -212,15 +215,11 @@ class _SerialPageState extends State<SerialPage> {
                           backgroundColor: Color.fromARGB(209, 7, 143, 228)),
                       onPressed: () {
                         sendCommand('WR MR35002 1\r');
-                        // bool ismachineStart = false;
-                        // bool isConnected = false;
-                        // bool isDebugMode = false;
-                        // bool isTrayFeederOn = false;
 
                         context.read<PLC_Relay_Update>().ismachineStart = false;
-                        // context.read<PLC_Relay_Update>().isConnected = false;
                         context.read<PLC_Relay_Update>().isDebugMode = false;
                         context.read<PLC_Relay_Update>().isTrayFeederOn = false;
+                        context.read<PLC_Relay_Update>().ismechanism = false;
                       },
                       child: Text('INIT PLC'),
                     ),
@@ -316,6 +315,32 @@ class _SerialPageState extends State<SerialPage> {
                             style: ElevatedButton.styleFrom(
                                 backgroundColor:
                                     Color.fromARGB(224, 239, 220, 11)),
+                          ),
+                    !value.ismechanism
+                        ? Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                sendCommand('WR MR35907 1\r');
+                                value.ismechanism = true;
+                              },
+                              child: Text('Demo mechanism MODE ON'),
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      Color.fromARGB(223, 31, 219, 190)),
+                            ),
+                          )
+                        : Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  sendCommand('WR MR35907 0\r');
+                                  value.ismechanism = false;
+                                },
+                                child: Text('Demo mechanism MODE OFF'),
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Color.fromARGB(223, 236, 45, 45))),
                           ),
                   ],
                 ),

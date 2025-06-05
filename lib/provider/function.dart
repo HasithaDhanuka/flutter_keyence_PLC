@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_libserialport/flutter_libserialport.dart';
 
 class PLC_Relay_Update extends ChangeNotifier {
-  //bool isConnected = false;
+  bool ismechanism = false;
   bool ismachineStart = false;
   bool isDebugMode = false;
   bool isTrayFeederOn = false;

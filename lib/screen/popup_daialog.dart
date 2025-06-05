@@ -70,19 +70,19 @@ Future openDialog({required BuildContext context, required port}) => showDialog(
                         buttonName: "上流AIR GUN OFF"),
                     output_button(
                         port: port,
-                        command: "WR MR35813 1\r",
+                        command: "WR MR35812 1\r",
                         buttonName: "エヤーガイド出す"),
                     output_button(
                         port: port,
-                        command: "WR MR35813 0\r",
+                        command: "WR MR35812 0\r",
                         buttonName: "エヤーガイド引く"),
                     output_button(
                         port: port,
-                        command: "WR MR35806 1\r",
+                        command: "WR MR35607 1\r",
                         buttonName: "トレー排除 UP"),
                     output_button(
                         port: port,
-                        command: "WR MR35806 0\r",
+                        command: "WR MR35608 1\r",
                         buttonName: "トレー排除 Down"),
                   ],
                 ),
@@ -91,11 +91,11 @@ Future openDialog({required BuildContext context, required port}) => showDialog(
                   children: [
                     output_button(
                         port: port,
-                        command: "WR MR35910 1\r",
+                        command: "WR MR35909 1\r",
                         buttonName: "上のガイド出る"),
                     output_button(
                         port: port,
-                        command: "WR MR35910 0\r",
+                        command: "WR MR35909 0\r",
                         buttonName: "上のガイド引く"),
                     output_button(
                         port: port,
